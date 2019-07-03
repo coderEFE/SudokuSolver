@@ -21,16 +21,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //sudoku board
-        final View[][] nums = new View[][]{{((EditText) findViewById(R.id.editText)), ((EditText) findViewById(R.id.editText2)), ((EditText) findViewById(R.id.editText3)), ((EditText) findViewById(R.id.editText4)), ((EditText) findViewById(R.id.editText5)), ((EditText) findViewById(R.id.editText6)), ((EditText) findViewById(R.id.editText7)), ((EditText) findViewById(R.id.editText8)), ((EditText) findViewById(R.id.editText9))},
-                {((EditText) findViewById(R.id.editText10)), ((EditText) findViewById(R.id.editText11)), ((EditText) findViewById(R.id.editText12)), ((EditText) findViewById(R.id.editText13)), ((EditText) findViewById(R.id.editText14)), ((EditText) findViewById(R.id.editText15)), ((EditText) findViewById(R.id.editText16)), ((EditText) findViewById(R.id.editText17)), ((EditText) findViewById(R.id.editText18))},
-                {((EditText) findViewById(R.id.editText19)), ((EditText) findViewById(R.id.editText20)), ((EditText) findViewById(R.id.editText21)), ((EditText) findViewById(R.id.editText22)), ((EditText) findViewById(R.id.editText23)), ((EditText) findViewById(R.id.editText24)), ((EditText) findViewById(R.id.editText25)), ((EditText) findViewById(R.id.editText26)), ((EditText) findViewById(R.id.editText27))},
-                {((EditText) findViewById(R.id.editText28)), ((EditText) findViewById(R.id.editText29)), ((EditText) findViewById(R.id.editText30)), ((EditText) findViewById(R.id.editText31)), ((EditText) findViewById(R.id.editText32)), ((EditText) findViewById(R.id.editText33)), ((EditText) findViewById(R.id.editText34)), ((EditText) findViewById(R.id.editText35)), ((EditText) findViewById(R.id.editText36))},
-                {((EditText) findViewById(R.id.editText37)), ((EditText) findViewById(R.id.editText38)), ((EditText) findViewById(R.id.editText39)), ((EditText) findViewById(R.id.editText40)), ((EditText) findViewById(R.id.editText41)), ((EditText) findViewById(R.id.editText42)), ((EditText) findViewById(R.id.editText43)), ((EditText) findViewById(R.id.editText44)), ((EditText) findViewById(R.id.editText45))},
-                {((EditText) findViewById(R.id.editText46)), ((EditText) findViewById(R.id.editText47)), ((EditText) findViewById(R.id.editText48)), ((EditText) findViewById(R.id.editText49)), ((EditText) findViewById(R.id.editText50)), ((EditText) findViewById(R.id.editText51)), ((EditText) findViewById(R.id.editText52)), ((EditText) findViewById(R.id.editText53)), ((EditText) findViewById(R.id.editText54))},
-                {((EditText) findViewById(R.id.editText55)), ((EditText) findViewById(R.id.editText56)), ((EditText) findViewById(R.id.editText57)), ((EditText) findViewById(R.id.editText58)), ((EditText) findViewById(R.id.editText59)), ((EditText) findViewById(R.id.editText60)), ((EditText) findViewById(R.id.editText61)), ((EditText) findViewById(R.id.editText62)), ((EditText) findViewById(R.id.editText63))},
-                {((EditText) findViewById(R.id.editText64)), ((EditText) findViewById(R.id.editText65)), ((EditText) findViewById(R.id.editText66)), ((EditText) findViewById(R.id.editText67)), ((EditText) findViewById(R.id.editText68)), ((EditText) findViewById(R.id.editText69)), ((EditText) findViewById(R.id.editText70)), ((EditText) findViewById(R.id.editText71)), ((EditText) findViewById(R.id.editText72))},
-                {((EditText) findViewById(R.id.editText73)), ((EditText) findViewById(R.id.editText74)), ((EditText) findViewById(R.id.editText75)), ((EditText) findViewById(R.id.editText76)), ((EditText) findViewById(R.id.editText77)), ((EditText) findViewById(R.id.editText78)), ((EditText) findViewById(R.id.editText79)), ((EditText) findViewById(R.id.editText80)), ((EditText) findViewById(R.id.editText81))}};
+        //get sudoku board by looping through all editText ids
+        final View[][] nums = new View[9][9];
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                int num = (1 + j + (i * 9));
+                nums[i][j] = (findViewById(getResId(num == 1 ? "editText" : ("editText" + num), R.id.class)));
+            }
+        }
         //reset button
         final Button solveButton = findViewById(R.id.button);
         final Button resetButton = findViewById(R.id.button2);
@@ -61,16 +59,12 @@ public class MainActivity extends AppCompatActivity {
         //solve button
         solveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                //assign array
-                array = new String[][]{{((EditText) findViewById(R.id.editText)).getText().toString(), ((EditText) findViewById(R.id.editText2)).getText().toString(), ((EditText) findViewById(R.id.editText3)).getText().toString(), ((EditText) findViewById(R.id.editText4)).getText().toString(), ((EditText) findViewById(R.id.editText5)).getText().toString(), ((EditText) findViewById(R.id.editText6)).getText().toString(), ((EditText) findViewById(R.id.editText7)).getText().toString(), ((EditText) findViewById(R.id.editText8)).getText().toString(), ((EditText) findViewById(R.id.editText9)).getText().toString()},
-                        {((EditText) findViewById(R.id.editText10)).getText().toString(), ((EditText) findViewById(R.id.editText11)).getText().toString(), ((EditText) findViewById(R.id.editText12)).getText().toString(), ((EditText) findViewById(R.id.editText13)).getText().toString(), ((EditText) findViewById(R.id.editText14)).getText().toString(), ((EditText) findViewById(R.id.editText15)).getText().toString(), ((EditText) findViewById(R.id.editText16)).getText().toString(), ((EditText) findViewById(R.id.editText17)).getText().toString(), ((EditText) findViewById(R.id.editText18)).getText().toString()},
-                        {((EditText) findViewById(R.id.editText19)).getText().toString(), ((EditText) findViewById(R.id.editText20)).getText().toString(), ((EditText) findViewById(R.id.editText21)).getText().toString(), ((EditText) findViewById(R.id.editText22)).getText().toString(), ((EditText) findViewById(R.id.editText23)).getText().toString(), ((EditText) findViewById(R.id.editText24)).getText().toString(), ((EditText) findViewById(R.id.editText25)).getText().toString(), ((EditText) findViewById(R.id.editText26)).getText().toString(), ((EditText) findViewById(R.id.editText27)).getText().toString()},
-                        {((EditText) findViewById(R.id.editText28)).getText().toString(), ((EditText) findViewById(R.id.editText29)).getText().toString(), ((EditText) findViewById(R.id.editText30)).getText().toString(), ((EditText) findViewById(R.id.editText31)).getText().toString(), ((EditText) findViewById(R.id.editText32)).getText().toString(), ((EditText) findViewById(R.id.editText33)).getText().toString(), ((EditText) findViewById(R.id.editText34)).getText().toString(), ((EditText) findViewById(R.id.editText35)).getText().toString(), ((EditText) findViewById(R.id.editText36)).getText().toString()},
-                        {((EditText) findViewById(R.id.editText37)).getText().toString(), ((EditText) findViewById(R.id.editText38)).getText().toString(), ((EditText) findViewById(R.id.editText39)).getText().toString(), ((EditText) findViewById(R.id.editText40)).getText().toString(), ((EditText) findViewById(R.id.editText41)).getText().toString(), ((EditText) findViewById(R.id.editText42)).getText().toString(), ((EditText) findViewById(R.id.editText43)).getText().toString(), ((EditText) findViewById(R.id.editText44)).getText().toString(), ((EditText) findViewById(R.id.editText45)).getText().toString()},
-                        {((EditText) findViewById(R.id.editText46)).getText().toString(), ((EditText) findViewById(R.id.editText47)).getText().toString(), ((EditText) findViewById(R.id.editText48)).getText().toString(), ((EditText) findViewById(R.id.editText49)).getText().toString(), ((EditText) findViewById(R.id.editText50)).getText().toString(), ((EditText) findViewById(R.id.editText51)).getText().toString(), ((EditText) findViewById(R.id.editText52)).getText().toString(), ((EditText) findViewById(R.id.editText53)).getText().toString(), ((EditText) findViewById(R.id.editText54)).getText().toString()},
-                        {((EditText) findViewById(R.id.editText55)).getText().toString(), ((EditText) findViewById(R.id.editText56)).getText().toString(), ((EditText) findViewById(R.id.editText57)).getText().toString(), ((EditText) findViewById(R.id.editText58)).getText().toString(), ((EditText) findViewById(R.id.editText59)).getText().toString(), ((EditText) findViewById(R.id.editText60)).getText().toString(), ((EditText) findViewById(R.id.editText61)).getText().toString(), ((EditText) findViewById(R.id.editText62)).getText().toString(), ((EditText) findViewById(R.id.editText63)).getText().toString()},
-                        {((EditText) findViewById(R.id.editText64)).getText().toString(), ((EditText) findViewById(R.id.editText65)).getText().toString(), ((EditText) findViewById(R.id.editText66)).getText().toString(), ((EditText) findViewById(R.id.editText67)).getText().toString(), ((EditText) findViewById(R.id.editText68)).getText().toString(), ((EditText) findViewById(R.id.editText69)).getText().toString(), ((EditText) findViewById(R.id.editText70)).getText().toString(), ((EditText) findViewById(R.id.editText71)).getText().toString(), ((EditText) findViewById(R.id.editText72)).getText().toString()},
-                        {((EditText) findViewById(R.id.editText73)).getText().toString(), ((EditText) findViewById(R.id.editText74)).getText().toString(), ((EditText) findViewById(R.id.editText75)).getText().toString(), ((EditText) findViewById(R.id.editText76)).getText().toString(), ((EditText) findViewById(R.id.editText77)).getText().toString(), ((EditText) findViewById(R.id.editText78)).getText().toString(), ((EditText) findViewById(R.id.editText79)).getText().toString(), ((EditText) findViewById(R.id.editText80)).getText().toString(), ((EditText) findViewById(R.id.editText81)).getText().toString()}};
+                //assign array by looping through all editText ids
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        array[i][j] = ((EditText) nums[i][j]).getText().toString();
+                    }
+                }
 
                 //check if board is valid and if it can be solved
                 if (validBoard(array)) {
@@ -92,6 +86,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //reflection function that loops through all resources of a certain class
+    private static int getResId(String resName, Class<?> c) {
+        try {
+            Field idField = c.getDeclaredField(resName);
+            return idField.getInt(idField);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     //check if board is valid and doesn't break sudoku rules
